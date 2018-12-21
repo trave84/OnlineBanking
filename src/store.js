@@ -29,18 +29,18 @@ const rrfConfig = {
   useFirestoreForProfile: true // Firestore for Profile instead of Realtime DB
 };
 
-// Init Firebse Instance
+// INIT Firebse Instance
 firebase.initializeApp(firebaseConfig);
-//Init firestore
-const firestore = firebase.firestore();
+// INIT firestore
+// const firestore = firebase.firestore();
 
-// Add reactReduxFirebase enhancer when making store creator
+// ADD reactReduxFirebase enhancer when making store creator
 const createStoreWithFirebase = compose(
   reactReduxFirebase(firebase, rrfConfig), // firebase instance as first argument
   reduxFirestore(firebase) // <- needed if using firestore
 )(createStore);
 
-// Add firebase to reducers
+// ADD firebase to reducers
 const rootReducer = combineReducers({
   firebase: firebaseReducer,
   firestore: firestoreReducer // <- needed if using firestore

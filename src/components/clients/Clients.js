@@ -1,18 +1,16 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+
+import { connect } from "react-redux";
+import { compose } from "redux";
+import { firestoreConnect } from "react-redux-firebase";
+// import { firestore } from "firebase";
 
 class Clients extends Component {
   render() {
-    const clients = [
-      {
-        id: "347814",
-        firstName: "Kev",
-        lastName: "Gmes",
-        email: "a@gmailcom",
-        phone: "3434 4323",
-        balance: "34500"
-      }
-    ];
+    // PULL data OUT of FS mapped Props
+    const { clients } = this.props;
 
     if (clients) {
       return (
@@ -34,7 +32,7 @@ class Clients extends Component {
             </thead>
             <tbody>
               {clients.map(client => (
-                // KEY ot ID
+                // KEY to ID
                 <tr key={client.id}>
                   <td>
                     {client.firstName} {client.lastName}
@@ -60,4 +58,20 @@ class Clients extends Component {
     }
   }
 }
-export default Clients;
+
+// ADDING Proptypes here
+//Component.pts
+Clients.propTypes = {
+  firestore: PropTypes.object.isRequired,
+  clients: PropTypes.array
+};
+
+export default compose(
+  // GET clients (FB Collection)
+  firestoreConnect([{ collection: "clients" }]),
+  // MAP new props TO state here:
+  connect((state, props) => ({
+    // props:state
+    clients: state.firestore.ordered.clients // clients: FS collection.state
+  }))
+)(Clients); //name of Component
