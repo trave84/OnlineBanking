@@ -10,6 +10,8 @@ import AddClient from "./components/clients/AddClient.jsx";
 import ClientDetails from "./components/clients/ClientDetails.jsx";
 import EditClient from "./components/clients/EditClient.jsx";
 
+import Login from "./components/auth/Login.jsx";
+
 class App extends Component {
   render() {
     return (
@@ -23,6 +25,7 @@ class App extends Component {
                 <Route exact path="/client/add" component={AddClient} />
                 <Route exact path="/client/:id" component={ClientDetails} />
                 <Route exact path="/client/edit/:id" component={EditClient} />
+                <Route exact path="/login" component={Login} />
               </Switch>
             </div>
           </div>
