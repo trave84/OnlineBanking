@@ -29,9 +29,9 @@ const rrfConfig = {
   useFirestoreForProfile: true // Firestore for Profile instead of Realtime DB
 };
 
-// INIT Firebse Instance
+// INIT FireBase Instance
 firebase.initializeApp(firebaseConfig);
-// INIT firestore
+// INIT FireStore
 const firestore = firebase.firestore();
 const settings = { timestampsInSnapshots: true };
 firestore.settings(settings);

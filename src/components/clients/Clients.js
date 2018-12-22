@@ -7,10 +7,31 @@ import { compose } from "redux";
 import { firestoreConnect } from "react-redux-firebase";
 // import { firestore } from "firebase";
 
+import Spinner from "../layout/Spinner";
+
 class Clients extends Component {
+  state = {
+    totalOwed: null
+  };
+
+  // Static NEEDS ONLY [props]
+  static getDerivedStateFromProps(props, state) {
+    const { clients } = props;
+
+    if (clients) {
+      // Add to total
+      const total = clients.reduce((total, client) => {
+        return total + parseFloat(client.balance.toString());
+      }, 0);
+      return { totalOwed: total };
+    }
+    return null;
+  }
+
   render() {
     // PULL data OUT of FS mapped Props
     const { clients } = this.props;
+    const { totalOwed } = this.state;
 
     if (clients) {
       return (
@@ -22,8 +43,14 @@ class Clients extends Component {
             </h2>
           </div>
           <div className="col-md-6" />
-          <table className="table">
-            <thead className="inverse">
+          <h5 class="text-right text-secondary">
+            Total Owed:{" "}
+            <span className="text-primary">
+              CZK {parseFloat(totalOwed.toFixed(2))}
+            </span>
+          </h5>
+          <table className="table table-hover">
+            <thead className="thead-light">
               <tr>
                 <th>Name</th>
                 <th>Email</th>
@@ -54,7 +81,7 @@ class Clients extends Component {
         </div>
       );
     } else {
-      return <h1>Loading..</h1>;
+      return <Spinner />;
     }
   }
 }
