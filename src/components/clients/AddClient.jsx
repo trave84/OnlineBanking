@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 // import { connect } from "react-redux";
 // import { compose } from "redux";
 import { firestoreConnect } from "react-redux-firebase";
-import { firestore } from "firebase";
+// import { firestore } from "firebase";
 
 class AddClient extends Component {
   // INIT Input Values
