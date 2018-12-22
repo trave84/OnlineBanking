@@ -55,6 +55,7 @@ class Clients extends Component {
                 <th>Name</th>
                 <th>Email</th>
                 <th>Balance</th>
+                <th />
               </tr>
             </thead>
             <tbody>
