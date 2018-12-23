@@ -11,9 +11,10 @@ import {
 } from "react-redux-firebase";
 import { reduxFirestore, firestoreReducer } from "redux-firestore";
 
-// Reducers
+// ALL REDUCERS
+import notifyReducer from "./reducers/notifyReducer.jsx";
 
-// Google add firebase to your project
+// GOOGLE ADD firebase to your project
 const firebaseConfig = {
   apiKey: "AIzaSyD0TCtP0q42XcXMPNluhwQR6hIM-MsyMqw",
   authDomain: "onlinebanking-b6543.firebaseapp.com",
@@ -23,7 +24,7 @@ const firebaseConfig = {
   messagingSenderId: "590909358988"
 };
 
-// react-redux-firebase config
+// CONFIG react-redux-firebase
 const rrfConfig = {
   userProfile: "users",
   useFirestoreForProfile: true // Firestore for Profile instead of Realtime DB
@@ -36,22 +37,25 @@ const firestore = firebase.firestore();
 const settings = { timestampsInSnapshots: true };
 firestore.settings(settings);
 
-// ADD reactReduxFirebase enhancer when making store creator
+// ADD ENHANCERS (reactReduxFirebase)  when making store creator
 const createStoreWithFirebase = compose(
   reactReduxFirebase(firebase, rrfConfig), // firebase instance as first argument
   reduxFirestore(firebase) // <- needed if using firestore
 )(createStore);
 
-// ADD firebase to reducers
-const rootReducer = combineReducers({
-  firebase: firebaseReducer,
-  firestore: firestoreReducer // <- needed if using firestore
-});
+// COMBINE all the Reducers
+const rootReducer =
+  // All in State (Redux Tool)
+  combineReducers({
+    firebase: firebaseReducer,
+    firestore: firestoreReducer,
+    notify: notifyReducer
+  });
 
-// Initil State
+// INIT State
 const initialState = {};
 
-// Create Store
+// CREATE the STORE (combinedReducers, [initState], [enhancers] )
 const store = createStoreWithFirebase(
   rootReducer,
   initialState,
