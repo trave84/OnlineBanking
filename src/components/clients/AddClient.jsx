@@ -86,7 +86,7 @@ class AddClient extends Component {
                   value={this.state.email}
                 />
               </div>
-              <div class="form-group">
+              <div className="form-group">
                 <label htmlFor="phone">Phone</label>
                 <input
                   type="text"
@@ -98,7 +98,7 @@ class AddClient extends Component {
                   value={this.state.phone}
                 />
               </div>
-              <div class="form-group">
+              <div className="form-group">
                 <label htmlFor="balance">Balance</label>
                 <input
                   type="text"

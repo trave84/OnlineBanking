@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./store";
+import { UserIsNotAuthenticated } from "./helpers/auth.jsx";
 
 import "./App.css";
 import AppNavbar from "./components/layout/AppNavbar.jsx";
@@ -21,10 +22,26 @@ class App extends Component {
             <AppNavbar />
             <div className="container">
               <Switch>
-                <Route exact path="/" component={Dashboard} />
-                <Route exact path="/client/add" component={AddClient} />
-                <Route exact path="/client/:id" component={ClientDetails} />
-                <Route exact path="/client/edit/:id" component={EditClient} />
+                <Route
+                  exact
+                  path="/"
+                  component={UserIsNotAuthenticated(Dashboard)}
+                />
+                <Route
+                  exact
+                  path="/client/add"
+                  component={UserIsNotAuthenticated(AddClient)}
+                />
+                <Route
+                  exact
+                  path="/client/:id"
+                  component={UserIsNotAuthenticated(ClientDetails)}
+                />
+                <Route
+                  exact
+                  path="/client/edit/:id"
+                  component={UserIsNotAuthenticated(EditClient)}
+                />
                 <Route exact path="/login" component={Login} />
               </Switch>
             </div>
