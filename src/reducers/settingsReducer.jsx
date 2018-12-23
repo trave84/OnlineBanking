@@ -16,6 +16,7 @@ export default function(state = initialState, action) {
     case DISABLE_BALANCE_ON_ADD:
       return {
         ...state,
+        // 3) Will Toggle the State by action.type
         disableBalanceOnAdd: !state.disableBalanceOnAdd
       };
 

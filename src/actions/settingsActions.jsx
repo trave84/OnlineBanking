@@ -2,33 +2,33 @@ import {
   DISABLE_BALANCE_ON_ADD,
   DISABLE_BALANCE_ON_EDIT,
   ALLOW_REGISTRATION
-} from './types';
+} from "./types";
 
 export const setDisableBalanceOnAdd = () => {
   // Get settings from localStorage
-  const settings = JSON.parse(localStorage.getItem('settings'));
+  const settings = JSON.parse(localStorage.getItem("settings"));
 
   // Toggle
   settings.disableBalanceOnAdd = !settings.disableBalanceOnAdd;
 
   // Set back to localStorage
-  localStorage.setItem('settings', JSON.stringify(settings));
+  localStorage.setItem("settings", JSON.stringify(settings));
 
   return {
-    type: DISABLE_BALANCE_ON_ADD,
+    type: DISABLE_BALANCE_ON_ADD, // 2) Will Call Reducer (which Toggles the State)
     payload: settings.disableBalanceOnAdd
   };
 };
 
 export const setDisableBalanceOnEdit = () => {
   // Get settings from localStorage
-  const settings = JSON.parse(localStorage.getItem('settings'));
+  const settings = JSON.parse(localStorage.getItem("settings"));
 
   // Toggle
   settings.disableBalanceOnEdit = !settings.disableBalanceOnEdit;
 
   // Set back to localStorage
-  localStorage.setItem('settings', JSON.stringify(settings));
+  localStorage.setItem("settings", JSON.stringify(settings));
 
   return {
     type: DISABLE_BALANCE_ON_EDIT,
@@ -38,13 +38,13 @@ export const setDisableBalanceOnEdit = () => {
 
 export const setAllowRegistration = () => {
   // Get settings from localStorage
-  const settings = JSON.parse(localStorage.getItem('settings'));
+  const settings = JSON.parse(localStorage.getItem("settings"));
 
   // Toggle
   settings.allowRegistration = !settings.allowRegistration;
 
   // Set back to localStorage
-  localStorage.setItem('settings', JSON.stringify(settings));
+  localStorage.setItem("settings", JSON.stringify(settings));
   return {
     type: ALLOW_REGISTRATION,
     payload: settings.allowRegistration

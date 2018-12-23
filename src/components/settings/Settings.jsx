@@ -9,6 +9,22 @@ import {
 } from "../../actions/settingsActions.jsx";
 
 class Settings extends Component {
+  // onChange Func by [checkboxes]
+  disableBalanceOnAddChange = () => {
+    const { setDisableBalanceOnAdd } = this.props;
+    setDisableBalanceOnAdd(); // 1) WIll Call the Action
+  };
+  // onChange Func by[checkboxes]
+  disableBalanceOnEditChange = () => {
+    const { setDisableBalanceOnEdit } = this.props;
+    setDisableBalanceOnEdit(); // 1) WIll Call the Action
+  };
+  // onChange Func by [checkboxes]
+  allowRegistrationChange = () => {
+    const { setAllowRegistration } = this.props;
+    setAllowRegistration(); // 1) WIll Call the Action
+  };
+
   render() {
     const {
       disableBalanceOnAdd,
@@ -35,7 +51,7 @@ class Settings extends Component {
                   type="checkbox"
                   name="allowRegistration"
                   checked={!!allowRegistration}
-                  onChange={this.setAllowRegistrationChange}
+                  onChange={this.allowRegistrationChange}
                 />
               </div>
               <div className="form-group">
@@ -43,7 +59,7 @@ class Settings extends Component {
                 <input
                   type="checkbox"
                   name="disableBalanceOnAdd"
-                  checked={!!allowRegistration}
+                  checked={!!disableBalanceOnAdd}
                   onChange={this.disableBalanceOnAddChange}
                 />
               </div>
@@ -52,7 +68,7 @@ class Settings extends Component {
                 <input
                   type="checkbox"
                   name="disableBalanceOnEdit"
-                  checked={!!allowRegistration}
+                  checked={!!disableBalanceOnEdit}
                   onChange={this.disableBalanceOnEditChange}
                 />
               </div>
@@ -66,8 +82,8 @@ class Settings extends Component {
 
 Settings.propTypes = {
   settings: PropTypes.object.isRequired,
-  setDisableBalanceOnAdd: PropTypes.object.isRequired,
-  setDisableBalanceOnEdit: PropTypes.object.isRequired,
+  setDisableBalanceOnAdd: PropTypes.func.isRequired,
+  setDisableBalanceOnEdit: PropTypes.func.isRequired,
   setAllowRegistration: PropTypes.object.isRequired
 };
 
