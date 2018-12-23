@@ -16,7 +16,7 @@ export const setDisableBalanceOnAdd = () => {
 
   return {
     type: DISABLE_BALANCE_ON_ADD, // 2) Will Call Reducer (which Toggles the State)
-    payload: settings.disableBalanceOnAdd
+    payload: settings.disableBalanceOnAdd //3) ANS Sends the payload back
   };
 };
 

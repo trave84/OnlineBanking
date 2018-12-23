@@ -54,8 +54,21 @@ const rootReducer =
     settings: settingsReducer
   });
 
-// INIT State
-const initialState = {};
+// BEFORE INIT: check for LS settings
+if (localStorage.getItem("settings") === null) {
+  // Default settings
+  const defaultSettings = {
+    disableBalanceOnAdd: true,
+    disableBalanceOnEdit: false,
+    allowRegistration: false
+  };
+
+  //SET to LS (ONLY String ALLOWED)
+  localStorage.setItem("settings", JSON.stringify(defaultSettings));
+}
+
+// INIT State (String->Object)
+const initialState = { settings: JSON.parse(localStorage.getItem("settings")) };
 
 // CREATE the STORE (combinedReducers, [initState], [enhancers] )
 const store = createStoreWithFirebase(
