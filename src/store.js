@@ -13,6 +13,7 @@ import { reduxFirestore, firestoreReducer } from "redux-firestore";
 
 // ALL REDUCERS
 import notifyReducer from "./reducers/notifyReducer.jsx";
+import settingsReducer from "./reducers/settingsReducer.jsx";
 
 // GOOGLE ADD firebase to your project
 const firebaseConfig = {
@@ -37,7 +38,7 @@ const firestore = firebase.firestore();
 const settings = { timestampsInSnapshots: true };
 firestore.settings(settings);
 
-// ADD ENHANCERS (reactReduxFirebase)  when making store creator
+// ADD ENHANCERS (reactReduxFirebase) when making store creator
 const createStoreWithFirebase = compose(
   reactReduxFirebase(firebase, rrfConfig), // firebase instance as first argument
   reduxFirestore(firebase) // <- needed if using firestore
@@ -49,7 +50,8 @@ const rootReducer =
   combineReducers({
     firebase: firebaseReducer,
     firestore: firestoreReducer,
-    notify: notifyReducer
+    notify: notifyReducer,
+    settings: settingsReducer
   });
 
 // INIT State

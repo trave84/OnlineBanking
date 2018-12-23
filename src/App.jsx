@@ -2,7 +2,10 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./store";
-import { UserIsNotAuthenticated } from "./helpers/auth.jsx";
+import {
+  UserIsAuthenticated,
+  UserIsNotAuthenticated
+} from "./helpers/auth.jsx";
 
 import "./App.css";
 import AppNavbar from "./components/layout/AppNavbar.jsx";
@@ -12,6 +15,7 @@ import ClientDetails from "./components/clients/ClientDetails.jsx";
 import EditClient from "./components/clients/EditClient.jsx";
 
 import Login from "./components/auth/Login.jsx";
+import Settings from "./components/settings/Settings.jsx";
 
 class App extends Component {
   render() {
@@ -25,24 +29,33 @@ class App extends Component {
                 <Route
                   exact
                   path="/"
-                  component={UserIsNotAuthenticated(Dashboard)}
+                  component={UserIsAuthenticated(Dashboard)}
                 />
                 <Route
                   exact
                   path="/client/add"
-                  component={UserIsNotAuthenticated(AddClient)}
+                  component={UserIsAuthenticated(AddClient)}
                 />
                 <Route
                   exact
                   path="/client/:id"
-                  component={UserIsNotAuthenticated(ClientDetails)}
+                  component={UserIsAuthenticated(ClientDetails)}
                 />
                 <Route
                   exact
                   path="/client/edit/:id"
-                  component={UserIsNotAuthenticated(EditClient)}
+                  component={UserIsAuthenticated(EditClient)}
                 />
-                <Route exact path="/login" component={Login} />
+                <Route
+                  exact
+                  path="/login"
+                  component={UserIsNotAuthenticated(Login)}
+                />
+                <Route
+                  exact
+                  path="/settings"
+                  component={UserIsAuthenticated(Settings)}
+                />
               </Switch>
             </div>
           </div>

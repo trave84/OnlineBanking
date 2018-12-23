@@ -16,7 +16,6 @@ export default function(state = initialState, action) {
         message: action.message,
         messageType: action.messageType
       };
-
     // OTHERWISE: just State
     default:
       return state;
