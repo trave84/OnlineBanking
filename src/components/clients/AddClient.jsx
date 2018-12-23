@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
-// import { connect } from "react-redux";
-// import { compose } from "redux";
+import { connect } from "react-redux";
+import { compose } from "redux";
 import { firestoreConnect } from "react-redux-firebase";
 // import { firestore } from "firebase";
 
@@ -41,6 +41,8 @@ class AddClient extends Component {
   };
 
   render() {
+    const { disableBalanceOnAdd } = this.props.settings;
+
     return (
       <div>
         <div className="row">
@@ -52,7 +54,7 @@ class AddClient extends Component {
           <div className="card-header">Add New Client</div>
           <div className="card-body">
             <form onSubmit={this.onSubmit}>
-              <div class="form-group">
+              <div className="form-group">
                 <label htmlFor="firstName">First Name</label>
                 <input
                   type="text"
@@ -64,7 +66,7 @@ class AddClient extends Component {
                   value={this.state.firstName}
                 />
               </div>
-              <div class="form-group">
+              <div className="form-group">
                 <label htmlFor="lastName">Last Name</label>
                 <input
                   type="text"
@@ -76,7 +78,7 @@ class AddClient extends Component {
                   value={this.state.lastName}
                 />
               </div>
-              <div class="form-group">
+              <div className="form-group">
                 <label htmlFor="email">Email</label>
                 <input
                   type="text"
@@ -106,6 +108,7 @@ class AddClient extends Component {
                   name="balance"
                   onChange={this.onChange}
                   value={this.state.balance}
+                  disabled={disableBalanceOnAdd}
                 />
               </div>
               <input
@@ -122,9 +125,15 @@ class AddClient extends Component {
 }
 
 AddClient.propTypes = {
-  firestore: PropTypes.object.isRequired
+  firestore: PropTypes.object.isRequired,
+  settings: PropTypes.object.isRequired
 };
 
 // DB Communication Connect
 // this.props.firestore (with methods) WILL be AVAILABLE
-export default firestoreConnect()(AddClient);
+export default compose(
+  firestoreConnect(),
+  connect((state, props) => ({
+    settings: state.settings
+  }))
+)(AddClient);
