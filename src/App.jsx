@@ -15,6 +15,7 @@ import ClientDetails from "./components/clients/ClientDetails.jsx";
 import EditClient from "./components/clients/EditClient.jsx";
 
 import Login from "./components/auth/Login.jsx";
+import Register from "./components/auth/Register.jsx";
 import Settings from "./components/settings/Settings.jsx";
 
 class App extends Component {
@@ -50,6 +51,11 @@ class App extends Component {
                   exact
                   path="/login"
                   component={UserIsNotAuthenticated(Login)}
+                />
+                <Route
+                  exact
+                  path="/register"
+                  component={UserIsNotAuthenticated(Register)}
                 />
                 <Route
                   exact
